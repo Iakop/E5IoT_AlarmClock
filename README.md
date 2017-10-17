@@ -35,3 +35,16 @@ To make the morning routine easier for the user, a display of some sort can be u
 - Microphone extension
 	- Raspberry Pi Hat, or ADC electret mic
 	- Hat is better for prototyping
+
+## To-Do list:
+1. Flash a Raspbian Stretch Lite Image onto SD card for booting
+2. Try Spotify installation - Does it work without a GUI?
+3. Get PWM Audio output - Lowpassfilter it. Use a Class D amp to amplify.
+4. Get access to the Particle IoT environment from Rpi Zero W.
+5. Play around with the Spotify API. What can be obtained from it? Is it useful for the project. - Or will another solution be needed?
+6. Implement the Alarm Clock feature. - Can be a polling shell script or similar. A Daemon, if there's time.
+7. Add a Display to the setup, along with menu buttons. An LCD should be enough for now.
+8. Access a Weather Station API through Particle somehow. This will be displayed on the LCD.
+9. Figure out a way to take microphone input. USB mic should do the trick?
+10. Make Google Assistant available to the Rpi. Google AIY should have some resources for this.
+8. 
