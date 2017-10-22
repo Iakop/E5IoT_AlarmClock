@@ -37,7 +37,7 @@ To make the morning routine easier for the user, a display of some sort can be u
 	- Hat is better for prototyping
 
 ## To-Do list:
-1. Flash a Raspbian Stretch Lite Image onto SD card for booting
+1. - DONE! - Flash a Raspbian Stretch Lite Image onto SD card for booting.
 2. Try Spotify installation - Does it work without a GUI?
 3. Get PWM Audio output - Lowpassfilter it. Use a Class D amp to amplify.
 4. Get access to the Particle IoT environment from Rpi Zero W.
