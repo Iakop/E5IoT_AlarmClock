@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import spotify # Imports Spotify methods.
 import threading # Imports Threading methods.
 logged_in_event = threading.Event() # Tracks when the user is logged in.
