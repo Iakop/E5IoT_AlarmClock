@@ -20,6 +20,8 @@ lcd_rows    = 2
 lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,
                            lcd_columns, lcd_rows, lcd_backlight)
 
+lcd.set_backlight(0)
+
 # Print a two line message
 lcd.message('Hello\nworld!')
 
@@ -60,10 +62,10 @@ lcd.clear()
 lcd.message('Flash backlight\nin 5 seconds...')
 time.sleep(5.0)
 # Turn backlight off.
-lcd.set_backlight(0)
+lcd.set_backlight(1)
 time.sleep(2.0)
 # Change message.
 lcd.clear()
 lcd.message('Goodbye!')
 # Turn backlight on.
-lcd.set_backlight(1)
+lcd.set_backlight(0)
