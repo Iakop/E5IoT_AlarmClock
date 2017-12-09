@@ -12,7 +12,7 @@ def connection_state_listener(session):
 session = spotify.Session() # Spotify Session object.
 audio = spotify.AlsaSink(session) # Audio object for output - sinks to alsa.
 loop = spotify.EventLoop(session) # Event loop for the session.
-loop.start() # Starts the 
+loop.start() # Starts the spotify session loop.
 
 session.on(
 	spotify.SessionEvent.CONNECTION_STATE_UPDATED,
