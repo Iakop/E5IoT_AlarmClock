@@ -105,12 +105,11 @@ def main():
         lcd.message('Nothing found...')
     for event in events:
         # Print out the start of the event:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        print(type(start))
-        # Clear LCD, and print events, and their start time.
-        lcdout = event['summary'].encode('ascii','replace')
+        start = event['start'].get('dateTime', event['start'].get('date')).encode('ascii','replace')
+	title = event['summary'].encode('ascii','replace')
+        # Clear LCD, and print the time and title of the events gotten:
         lcd.clear()
-        lcd.message('Got event:\n' + lcdout)
+        lcd.message(start + '\n' + title)
         time.sleep(1)
         
 if __name__ == '__main__':
