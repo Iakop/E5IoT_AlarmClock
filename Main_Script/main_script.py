@@ -58,7 +58,6 @@ loop = spotify.EventLoop(session) # Event loop for the session.
 def getCalCredentials():
     home_dir = os.path.expanduser('~') # Sets the home directory to the user home directory.
     credential_dir = os.path.join(home_dir, '.credentials') # Appends the credentials directory to the user directory.
-    
 	# Checks if the path exists. If not, os method creates the dir.
 	if not os.path.exists(credential_dir):
         os.makedirs(credential_dir)
