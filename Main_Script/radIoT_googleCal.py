@@ -59,13 +59,8 @@ def getCalPosts():
     end = end.isoformat() + 'Z'
     now = now.isoformat() + 'Z'
     # Write out to LCD:
-    lcd.clear()
-    lcd.message('Getting Calendar')
     eventsResult = service.events().list(
         calendarId='primary', timeMin=now, timeMax=end, singleEvents=True,
         orderBy='startTime').execute()
     events = eventsResult.get('items', [])
-    lcd.clear()
-    lcd.message('Done :)')
-    time.sleep(1)
     return events

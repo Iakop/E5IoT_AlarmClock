@@ -1,14 +1,26 @@
 #!/usr/bin/python
 
-import radIoT_googleCal
-import radIoT_LCD
+# For time delays and sleeping
+import time
+
+# Separate scripts
+from radIoT_googleCal import getCalPosts
+from radIoT_LCD import initLCD
 #import radIoT_spotify
 
-lcd = initLCD()
+global lcd
 
 def main():
+    lcd = initLCD()
     lcd.set_backlight(0)
+    lcd.message('Welcome!')
+
+    lcd.clear()
+    lcd.message('Getting Google\nCalendar info...')
     events = getCalPosts()
+    lcd.clear()
+    lcd.message('Done!')
+    time.sleep(1)
     # Check if anything was received:
     if not events:
         # clear LCD, and write that nothing was found.
@@ -22,6 +34,6 @@ def main():
         lcd.clear()
         lcd.message(start + '\n' + title)
         time.sleep(1)
-        
+
 if __name__ == '__main__':
     main()

@@ -1,8 +1,5 @@
 #!/usr/bin/python
 
-# For time delays, and sleeping
-import time
-
 # For driving an LCD to display results.
 import Adafruit_CharLCD as LCD
 
