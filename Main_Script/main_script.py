@@ -41,6 +41,7 @@ except ImportError:
 
 # Setup client secrets and Application Name for Calendar.
 SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
+CLIENT_SECRET_PATH = '/media/certs_n_sounds/certs/'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'radIoT Alarm Clock'
 
@@ -70,7 +71,7 @@ def getCalCredentials():
 	# If no credentials are found, or they are invalid:
     if not credentials or credentials.invalid:
 		# Create the credentials from the Client Secret File. 
-        flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
+        flow = client.flow_from_clientsecrets(CLIENT_SECRET_PATH + CLIENT_SECRET_FILE, SCOPES)
         flow.user_agent = APPLICATION_NAME
 		# Depending on the import of the argparse:
         if flags:
