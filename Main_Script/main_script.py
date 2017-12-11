@@ -1,11 +1,5 @@
 #!/usr/bin/python
 
-# For time delays, and sleeping
-import time
-
-# For driving an LCD to display results.
-import Adafruit_CharLCD as LCD
-
 # For the Google Calendar API
 from __future__ import print_function
 import httplib2
@@ -24,6 +18,12 @@ except ImportError:
 # Import Spotify API
 import spotify # Imports Spotify methods.
 import threading # Imports Threading methods.
+
+# For time delays, and sleeping
+import time
+
+# For driving an LCD to display results.
+import Adafruit_CharLCD as LCD
 
 # Raspberry Pi LCD pin configuration:
 lcd_rs        = 25
