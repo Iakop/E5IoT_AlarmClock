@@ -45,12 +45,6 @@ CLIENT_SECRET_PATH = '/media/certs_n_sounds/certs/'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'radIoT Alarm Clock'
 
-# Initialize Spotify session, and sinks for audio.
-logged_in_event = threading.Event() # Tracks when the user is logged in.
-session = spotify.Session() # Spotify Session object.
-audio = spotify.AlsaSink(session) # Audio object for output - sinks to alsa.
-loop = spotify.EventLoop(session) # Event loop for the session.
-
 def getCalCredentials():
     home_dir = os.path.expanduser('~') # Sets the home directory to the user home directory.
     credential_dir = os.path.join(home_dir, '.credentials') # Appends the credentials directory to the user directory.

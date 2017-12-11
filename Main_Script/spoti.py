@@ -2,6 +2,12 @@
 import spotify # Imports Spotify methods.
 import threading # Imports Threading methods.
 
+# Initialize Spotify session, and sinks for audio.
+logged_in_event = threading.Event() # Tracks when the user is logged in.
+session = spotify.Session() # Spotify Session object.
+audio = spotify.AlsaSink(session) # Audio object for output - sinks to alsa.
+loop = spotify.EventLoop(session) # Event loop for the session.
+
 # A login state tracker thread.
 def spotifyConnectionState(session):
     if session.connection.state is spotify.ConnectionState.LOGGED_IN:
