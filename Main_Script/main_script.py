@@ -6,6 +6,25 @@ import time
 # For driving an LCD to display results.
 import Adafruit_CharLCD as LCD
 
+# For the Google Calendar API
+from __future__ import print_function
+import httplib2
+import os
+from apiclient import discovery
+from oauth2client import client
+from oauth2client import tools # Tools to work operations for Oauth2.
+from oauth2client.file import Storage # Method to store Oauth2 credentials.
+import datetime
+try:
+    import argparse
+    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
+except ImportError:
+    flags = None
+    
+# Import Spotify API
+import spotify # Imports Spotify methods.
+import threading # Imports Threading methods.
+
 # Raspberry Pi LCD pin configuration:
 lcd_rs        = 25
 lcd_en        = 24
@@ -24,33 +43,14 @@ lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,
                            lcd_columns, lcd_rows, lcd_backlight)
 lcd.show_cursor(True)
 
-# For the Google Calendar API
-from __future__ import print_function
-import httplib2
-import os
-from apiclient import discovery
-from oauth2client import client
-from oauth2client import tools # Tools to work operations for Oauth2.
-from oauth2client.file import Storage # Method to store Oauth2 credentials.
-import datetime
-try:
-    import argparse
-    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
-except ImportError:
-    flags = None
-
 # Setup client secrets and Application Name for Calendar.
 SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
 CLIENT_SECRET_PATH = '/media/certs_n_sounds/certs/'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'radIoT Alarm Clock'
 
-# Import Spotify API
-import spotify # Imports Spotify methods.
-import threading # Imports Threading methods.
-logged_in_event = threading.Event() # Tracks when the user is logged in.
-
 # Initialize Spotify session, and sinks for audio.
+logged_in_event = threading.Event() # Tracks when the user is logged in.
 session = spotify.Session() # Spotify Session object.
 audio = spotify.AlsaSink(session) # Audio object for output - sinks to alsa.
 loop = spotify.EventLoop(session) # Event loop for the session.
