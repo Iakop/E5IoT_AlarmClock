@@ -4,6 +4,8 @@ import radIoT_googleCal
 import radIoT_LCD
 #import radIoT_spotify
 
+lcd = initLCD()
+
 def main():
     lcd.set_backlight(0)
     events = getCalPosts()
