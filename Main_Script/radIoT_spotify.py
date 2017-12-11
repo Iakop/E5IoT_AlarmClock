@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # Import Spotify API
 import spotify # Imports Spotify methods.
 import threading # Imports Threading methods.
