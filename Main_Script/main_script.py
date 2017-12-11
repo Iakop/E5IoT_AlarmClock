@@ -37,7 +37,8 @@ lcd_rows    = 2
 # Initialize the LCD using the pins above.
 lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,
                            lcd_columns, lcd_rows, lcd_backlight)
-lcd.show_cursor(True)
+lcd.show_cursor(False)
+lcd.clear()
 
 # Setup client secrets and Application Name for Calendar.
 SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
@@ -75,21 +76,33 @@ def getCalPosts():
     http = credentials.authorize(httplib2.Http()) # Authorizes the credentials using httplib2.
     service = discovery.build('calendar', 'v3', http=http) # Defines the service, that provides the calendar dates.
 
-	# Get the upcoming calendar dates for the next 10 days:
-	# Define "now".
-    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-    end = now.day() + 10 # now Date plus 10 days.
+    # Get the upcoming calendar dates for the next 10 days:
+    # Define "now".
+    now = datetime.datetime.utcnow()
+    span = datetime.timedelta(days=10)
+    end = now + span
+    end = end.isoformat() + 'Z'
+    now = now.isoformat() + 'Z'
+    # Write out to LCD:
+    lcd.clear()
     lcd.message('Getting Calendar')
     eventsResult = service.events().list(
         calendarId='primary', timeMin=now, timeMax=end, singleEvents=True,
         orderBy='startTime').execute()
     events = eventsResult.get('items', [])
-	
+    lcd.clear()
+    lcd.message('Done :)')
+    time.sleep(1)
+    # Check if anything was received:
     if not events:
+        lcd.clear()
         lcd.message('Nothing found...')
     for event in events:
-        details = event['attachments'].get('title', event['start'].get('date'))
-        lcd.message(details)
+        #start = event['start'].get('dateTime', event['start'].get('date'))
+        lcd.clear()
+        lcdout = event['summary'].encode('ascii','replace')
+        lcd.message('Got event:\n' + lcdout)
+        time.sleep(1)
 
 # 1 - On boot.
 # Get the Calendar data from Google Calendar's API
@@ -104,6 +117,8 @@ def getCalPosts():
 
 def main():	
     lcd.set_backlight(0)
+    getCalPosts()
+
 
 if __name__ == '__main__':
     main()
