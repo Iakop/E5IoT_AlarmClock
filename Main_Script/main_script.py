@@ -93,32 +93,25 @@ def getCalPosts():
     lcd.clear()
     lcd.message('Done :)')
     time.sleep(1)
+    return events
+
+def main():
+    lcd.set_backlight(0)
+    events = getCalPosts()
     # Check if anything was received:
     if not events:
+        # clear LCD, and write that nothing was found.
         lcd.clear()
         lcd.message('Nothing found...')
     for event in events:
-        #start = event['start'].get('dateTime', event['start'].get('date'))
-        lcd.clear()
+        # Print out the start of the event:
+        start = event['start'].get('dateTime', event['start'].get('date'))
+        print(type(start))
+        # Clear LCD, and print events, and their start time.
         lcdout = event['summary'].encode('ascii','replace')
+        lcd.clear()
         lcd.message('Got event:\n' + lcdout)
         time.sleep(1)
-
-# 1 - On boot.
-# Get the Calendar data from Google Calendar's API
-
-# Keeps all of the next 10 days of posts in a list.
-# Will be updated once an event has fired, or after 15 minutes.
-
-# If none are available, set a flag for no calendar available.
-
-#_______________________________________________________________
-
-
-def main():	
-    lcd.set_backlight(0)
-    getCalPosts()
-
-
+        
 if __name__ == '__main__':
     main()
