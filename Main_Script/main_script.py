@@ -99,7 +99,7 @@ def getCalPosts():
 	if not events:
         lcd.message('Nothing found...')
     for event in events:
-        details = event['start'].get('dateTime', event['start'].get('date'))
+        details = event['attachments'].get('title', event['start'].get('date'))
         lcd.message(details)
 
 # A login state tracker thread.
