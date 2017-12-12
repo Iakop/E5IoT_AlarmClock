@@ -25,11 +25,14 @@ fsm = Fysom({
   'events': [
     {'name': 'showWelcome', 'src': 'start', 'dst': 'welcome'},
     {'name': 'showMenu', 'src': ['welcome','songStart','weatherAPI','calendarAPI'], 'dst': 'menu'},
-    {'name': 'alarmTrigger', 'src': 'menu', 'dst': 'weatherAPI'},
+    {'name': 'alarmTrigger', 'src': 'menu', 'dst': 'startSong'},
     {'name': 'alarmTrigger', 'src': 'startSong', 'dst': 'weatherAPI'},
     {'name': 'getCalendar', 'src': 'menu', 'dst': 'calendarAPI'},
     {'name': 'getWeather', 'src': 'menu', 'dst': 'weatherAPI'},
-    {'name': 'getSong', 'src': 'menu', 'dst': 'startSong'}
+    {'name': 'getSong', 'src': 'menu', 'dst': 'startSong'},
+    {'name': 'getCalendar', 'src': 'voiceAPI', 'dst': 'calendarAPI'},
+    {'name': 'getWeather', 'src': 'voiceAPI', 'dst': 'weatherAPI'},
+    {'name': 'getSong', 'src': 'voiceAPI', 'dst': 'startSong'}
   ]
 })
 
