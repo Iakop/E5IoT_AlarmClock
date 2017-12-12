@@ -38,7 +38,7 @@ SOUNDS_PATH = '/media/certs_n_sounds/sounds/'
 global lcd
 global events
 global wf
-wf = wave.open(SOUNDS_PATH + 'Daytona_USA_Theme_.wav', 'rb')
+wf = wave.open(SOUNDS_PATH + 'Daytona_USA_Theme.wav', 'rb')
 
 def callback(in_data, frame_count, time_info, status):
     data = wf.readframes(frame_count)
@@ -52,21 +52,21 @@ stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
 
 def main():
     lcd = initLCD()
-
+    
     while True:
-        if fsm.isstate('start'):
+        if fsm.isstate('start')
             fsm.showWelcome()
-
-        elif fsm.isstate('welcome'):
+        
+        elif fsm.isstate('welcome')
             lcd.set_backlight(0)
             lcd.message('Welcome!')
             time.sleep(1)
             fsm.showMenu()
-
-        elif fsm.isstate('menu'):
+            
+        elif fsm.isstate('menu')
             fsm.getCalendar()
 
-        elif fsm.isstate('calendarAPI'):
+        elif fsm.isstate('calendarAPI')
             lcd.clear()
             lcd.message('Getting Google\nCalendar info...')
             events = getCalPosts()
@@ -87,12 +87,12 @@ def main():
             lcd.message('Done!')
             time.sleep(1)
             fsm.showMenu()
-
-        elif fsm.isstate('weatherAPI'):
+        
+        elif fsm.isstate('weatherAPI')
             fsm.showMenu()
-
-        elif fsm.isstate('startSong'):
-            wf = wave.open(SOUNDS_PATH + 'Daytona_USA_Theme_.wav', 'rb')
+        
+        elif fsm.isstate('startSong')
+            wf = wave.open(SOUNDS_PATH + 'Daytona_USA_Theme.wav', 'rb')
             p = pyaudio.PyAudio()
             stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                 channels=wf.getnchannels(),
@@ -101,6 +101,6 @@ def main():
                 stream_callback=callback)
             stream.start_stream()
             fsm.showMenu()
-
+    
 if __name__ == '__main__':
     main()
