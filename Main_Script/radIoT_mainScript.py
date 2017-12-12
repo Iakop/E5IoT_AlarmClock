@@ -24,7 +24,7 @@ fsm = Fysom({
   'initial': 'start',
   'events': [
     {'name': 'showWelcome', 'src': 'start', 'dst': 'welcome'},
-    {'name': 'showMenu', 'src': ['welcome','songStart','weatherAPI','calendarAPI'], 'dst': 'menu'},
+    {'name': 'showMenu', 'src': ['welcome','startSong','weatherAPI','calendarAPI'], 'dst': 'menu'},
     {'name': 'alarmTrigger', 'src': 'menu', 'dst': 'startSong'},
     {'name': 'alarmTrigger', 'src': 'startSong', 'dst': 'weatherAPI'},
     {'name': 'getCalendar', 'src': 'menu', 'dst': 'calendarAPI'},
@@ -41,7 +41,7 @@ SOUNDS_PATH = '/media/certs_n_sounds/sounds/'
 global lcd
 global events
 global wf
-wf = wave.open(SOUNDS_PATH + 'Daytona_USA_Theme.wav', 'rb')
+wf = wave.open(SOUNDS_PATH + 'Daytona_USA_Theme_.wav', 'rb')
 
 def callback(in_data, frame_count, time_info, status):
     data = wf.readframes(frame_count)
@@ -57,19 +57,19 @@ def main():
     lcd = initLCD()
     
     while True:
-        if fsm.isstate('start')
+        if fsm.isstate('start'):
             fsm.showWelcome()
         
-        elif fsm.isstate('welcome')
+        elif fsm.isstate('welcome'):
             lcd.set_backlight(0)
             lcd.message('Welcome!')
             time.sleep(1)
             fsm.showMenu()
             
-        elif fsm.isstate('menu')
+        elif fsm.isstate('menu'):
             fsm.getCalendar()
 
-        elif fsm.isstate('calendarAPI')
+        elif fsm.isstate('calendarAPI'):
             lcd.clear()
             lcd.message('Getting Google\nCalendar info...')
             events = getCalPosts()
@@ -91,11 +91,11 @@ def main():
             time.sleep(1)
             fsm.showMenu()
         
-        elif fsm.isstate('weatherAPI')
+        elif fsm.isstate('weatherAPI'):
             fsm.showMenu()
         
-        elif fsm.isstate('startSong')
-            wf = wave.open(SOUNDS_PATH + 'Daytona_USA_Theme.wav', 'rb')
+        elif fsm.isstate('startSong'):
+            wf = wave.open(SOUNDS_PATH + 'Daytona_USA_Theme.wav_', 'rb')
             p = pyaudio.PyAudio()
             stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                 channels=wf.getnchannels(),
