@@ -41,6 +41,8 @@ SOUNDS_PATH = '/media/certs_n_sounds/sounds/'
 global lcd
 global events
 global wf
+global alarmFlag
+
 wf = wave.open(SOUNDS_PATH + 'Daytona_USA_Theme_.wav', 'rb')
 
 def callback(in_data, frame_count, time_info, status):
@@ -52,6 +54,7 @@ stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
     rate=wf.getframerate(),
     output=True,
     stream_callback=callback)
+stream.stop_stream()
 
 def main():
     lcd = initLCD()
@@ -95,7 +98,7 @@ def main():
             fsm.showMenu()
         
         elif fsm.isstate('startSong'):
-            wf = wave.open(SOUNDS_PATH + 'Daytona_USA_Theme.wav_', 'rb')
+            wf = wave.open(SOUNDS_PATH + 'Daytona_USA_Theme_.wav', 'rb')
             p = pyaudio.PyAudio()
             stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                 channels=wf.getnchannels(),
